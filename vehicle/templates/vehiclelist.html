@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-sm-6">
+    <h2>Vehicle Details</h2>
+    {% if v %}
+        <div class="col-12" style="overflow-x: scroll">
+            <table class="table" border="8">
+              <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Vehicle Type</th>
+                    <th scope="col">Model Name</th>
+                    <th scope="col">Vehicle Color</th>
+                    <th scope="col">Engine Type</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for vehicle in v %}
+                <tr>
+                    <td>{{ vehicle.vehicletype }}</td>
+                    <td>{{ vehicle.modelname }}</td>
+                    <td>{{ vehicle.vehiclecolor }}</td>
+                    <td>{{ vehicle.enginetype }}</td>
+                    <td><a href="{% url 'updatedata' vehicle.id %}"><button type="button" class="btn btn-outline-primary btn-sm">Edit</button></a></td>
+                    <td><a href="{% url 'deletedata' vehicle.id %}"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></a></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+    {% else %}
+    <div class="col-12">
+        <div class="alert alert-warning" role="alert">
+            There is no product, yet.
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock content %}
